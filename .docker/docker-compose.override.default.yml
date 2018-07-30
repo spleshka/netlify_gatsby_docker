@@ -1,8 +1,8 @@
-version: "2"
+version: '3'
 services:
 
   node:
     volumes:
-      - ../:/app
+      - ../app:/site
       # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
-      #- ../:/app:cached
+      #- ../app:/site:cached

@@ -1,4 +1,4 @@
-.PHONY: default up stop restart down install lint
+.PHONY: default up stop restart down install
 
 # Make sure the local file with docker-compose overrides exist.
 $(shell ! test -e \.\/.docker\/docker-compose\.override\.yml && cat \.\/.docker\/docker-compose\.override\.default\.yml > \.\/.docker\/docker-compose\.override\.yml)
@@ -20,8 +20,8 @@ default: up
 up:
 	@echo "${YELLOW}Build and run containers...${COLOR_END}"
 	docker-compose up -d  --remove-orphans
-	@echo "${YELLOW}Starting the project...${COLOR_END}"
-	docker-compose run node yarn run develop
+	@echo "${YELLOW}Streaming the project logs...${COLOR_END}"
+	docker-compose logs -f node
 
 stop:
 	@echo "${YELLOW}Stopping containers...${COLOR_END}"
@@ -38,11 +38,7 @@ down:
 
 install:
 	@echo "${YELLOW}Installing the project...${COLOR_END}"
-	docker-compose run node yarn install
-
-lint:
-	@echo "${YELLOW}Checking coding styles...${COLOR_END}"
-	docker-compose run node yarn run format
+	docker-compose run node sh -c "yarn install"
 
 # https://stackoverflow.com/a/6273809/1826109
 %:

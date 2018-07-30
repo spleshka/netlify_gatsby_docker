@@ -1,16 +1,15 @@
-version: '2'
+version: '3'
 services:
 
   node:
-    image: nikolaik/python-nodejs:latest
-    working_dir: /app
+    image: aripalo/gatsby-docker
     labels:
       - 'traefik.backend=node'
       - 'traefik.port=8000'
-      - 'traefik.frontend.rule=Host:app.${PROJECT_BASE_URL}'
+      - 'traefik.frontend.rule=Host:${PROJECT_URL}'
     expose:
       - "8000"
-    command: sh -c 'yarn run develop'
+    command: develop
 
   traefik:
     image: traefik
