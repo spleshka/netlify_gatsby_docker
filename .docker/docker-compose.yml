@@ -1,0 +1,22 @@
+version: '2'
+services:
+
+  node:
+    image: nikolaik/python-nodejs:latest
+    working_dir: /app
+    labels:
+      - 'traefik.backend=node'
+      - 'traefik.port=8000'
+      - 'traefik.frontend.rule=Host:app.${PROJECT_BASE_URL}'
+    expose:
+      - "8000"
+    command: sh -c 'yarn run develop'
+
+  traefik:
+    image: traefik
+    restart: unless-stopped
+    command: -c /dev/null --web --docker --logLevel=INFO
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

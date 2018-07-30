@@ -1,0 +1,8 @@
+version: "2"
+services:
+
+  node:
+    volumes:
+      - ../:/app
+      # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+      #- ../:/app:cached
