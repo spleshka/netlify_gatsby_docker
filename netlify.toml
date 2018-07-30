@@ -1,6 +1,6 @@
 [build]
   base    = "app/"
-  publish = "public"
+  publish = "app/public"
   command = "npm run build"
 [build.environment]
   YARN_VERSION = "1.3.2"
